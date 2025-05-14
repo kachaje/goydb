@@ -9,8 +9,8 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/blevesearch/bleve"
-	"github.com/blevesearch/bleve/mapping"
+	"github.com/blevesearch/bleve/v2"
+	"github.com/blevesearch/bleve/v2/mapping"
 	"github.com/goydb/goydb/pkg/model"
 	"github.com/goydb/goydb/pkg/port"
 )
@@ -112,7 +112,7 @@ func (i *ExternalSearchIndex) Ensure(ctx context.Context, tx port.EngineWriteTra
 	// needs to be opened
 	index, err := bleve.Open(i.path)
 	if err != nil {
-		return fmt.Errorf("failed to open search index %q: %w", i.path, index)
+		return fmt.Errorf("failed to open search index %q: %v", i.path, index)
 	}
 
 	// there is no other way to access the index mapping implementation
