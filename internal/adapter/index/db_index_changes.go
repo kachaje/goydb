@@ -1,6 +1,7 @@
 package index
 
 import (
+	"bytes"
 	"context"
 	"encoding/binary"
 	"fmt"
@@ -8,6 +9,7 @@ import (
 
 	"github.com/goydb/goydb/pkg/model"
 	"github.com/goydb/goydb/pkg/port"
+	"gopkg.in/mgo.v2/bson"
 )
 
 const (
@@ -74,8 +76,31 @@ func (i *ChangesIndex) UpdateStored(ctx context.Context, tx port.EngineWriteTran
 	defer i.mu.Unlock()
 
 	for _, doc := range docs {
+		rawData := model.Document{
+			ID:       doc.ID,
+			Rev:      doc.Rev,
+			Deleted:  false,
+			LocalSeq: doc.LocalSeq,
+			Data:     doc.Data,
+			Key:      doc.Key,
+		}
+
 		tx.PutWithSequence([]byte(ChangesIndexName), nil, []byte(doc.ID), func(_, _ []byte, seq uint64) (newKey []byte, newValue []byte) {
-			return uint64ToKey(seq), nil
+			var intKey uint64
+
+			key := uint64ToKey(seq)
+
+			buf := bytes.NewBuffer(key)
+			binary.Read(buf, binary.BigEndian, &intKey)
+
+			rawData.LocalSeq = intKey
+
+			value, err := bson.Marshal(rawData)
+			if err != nil {
+				return key, nil
+			}
+
+			return key, value
 		})
 		// also add invalidation record
 		tx.PutWithSequence([]byte(ChangesIndexInvalidationName), []byte(doc.ID), nil, func(_, _ []byte, seq uint64) (newKey []byte, newValue []byte) {
