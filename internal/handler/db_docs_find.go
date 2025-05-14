@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/model"
 )
 
 type DBDocsFind struct {

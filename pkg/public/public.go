@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/gorilla/mux"
-	"github.com/goydb/goydb/pkg/zipvfs"
+	"github.com/kachaje/goydb/pkg/zipvfs"
 )
 
 type Public struct {

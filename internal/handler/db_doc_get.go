@@ -12,8 +12,8 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/goydb/goydb/internal/adapter/storage"
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/internal/adapter/storage"
+	"github.com/kachaje/goydb/pkg/model"
 )
 
 type DBDocGet struct {

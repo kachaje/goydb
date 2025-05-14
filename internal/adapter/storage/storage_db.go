@@ -9,10 +9,10 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/goydb/goydb/internal/adapter/bbolt_engine"
-	"github.com/goydb/goydb/internal/adapter/index"
-	"github.com/goydb/goydb/pkg/model"
-	"github.com/goydb/goydb/pkg/port"
+	"github.com/kachaje/goydb/internal/adapter/bbolt_engine"
+	"github.com/kachaje/goydb/internal/adapter/index"
+	"github.com/kachaje/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/port"
 )
 
 type Database struct {

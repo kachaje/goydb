@@ -5,9 +5,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/goydb/goydb/internal/adapter/storage"
-	"github.com/goydb/goydb/pkg/model"
-	"github.com/goydb/goydb/pkg/port"
+	"github.com/kachaje/goydb/internal/adapter/storage"
+	"github.com/kachaje/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/port"
 )
 
 type Authenticator struct {

@@ -1,6 +1,6 @@
 package port
 
-import "github.com/goydb/goydb/pkg/model"
+import "github.com/kachaje/goydb/pkg/model"
 
 type Iterator interface {
 	Total() int

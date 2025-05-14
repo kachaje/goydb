@@ -5,8 +5,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/goydb/goydb/internal/adapter/storage"
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/internal/adapter/storage"
+	"github.com/kachaje/goydb/pkg/model"
 	"github.com/mitchellh/mapstructure"
 )
 

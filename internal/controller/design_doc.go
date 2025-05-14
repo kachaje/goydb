@@ -3,10 +3,10 @@ package controller
 import (
 	"context"
 
-	"github.com/goydb/goydb/internal/adapter/reducer"
-	"github.com/goydb/goydb/internal/adapter/storage"
-	"github.com/goydb/goydb/pkg/model"
-	"github.com/goydb/goydb/pkg/port"
+	"github.com/kachaje/goydb/internal/adapter/reducer"
+	"github.com/kachaje/goydb/internal/adapter/storage"
+	"github.com/kachaje/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/port"
 )
 
 type DesignDoc struct {

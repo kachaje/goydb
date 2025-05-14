@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/model"
 )
 
 const AttachmentDir = "attachments"

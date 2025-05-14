@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/goydb/goydb/internal/adapter/index"
-	"github.com/goydb/goydb/internal/adapter/storage"
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/internal/adapter/index"
+	"github.com/kachaje/goydb/internal/adapter/storage"
+	"github.com/kachaje/goydb/pkg/model"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/mgo.v2/bson"
 )

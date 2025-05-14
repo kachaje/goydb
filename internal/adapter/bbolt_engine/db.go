@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"os"
 
-	"github.com/goydb/goydb/internal/adapter/index"
-	"github.com/goydb/goydb/pkg/model"
-	"github.com/goydb/goydb/pkg/port"
+	"github.com/kachaje/goydb/internal/adapter/index"
+	"github.com/kachaje/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/port"
 	"go.etcd.io/bbolt"
 )
 

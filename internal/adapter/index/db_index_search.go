@@ -11,8 +11,8 @@ import (
 
 	"github.com/blevesearch/bleve/v2"
 	"github.com/blevesearch/bleve/v2/mapping"
-	"github.com/goydb/goydb/pkg/model"
-	"github.com/goydb/goydb/pkg/port"
+	"github.com/kachaje/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/port"
 )
 
 var _ port.DocumentIndex = (*ExternalSearchIndex)(nil)

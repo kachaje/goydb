@@ -6,9 +6,9 @@ import (
 	"os"
 
 	"github.com/gorilla/handlers"
-	"github.com/goydb/goydb/pkg/goydb"
-	"github.com/goydb/goydb/pkg/public"
-	"github.com/goydb/utils"
+	"github.com/kachaje/goydb/pkg/goydb"
+	"github.com/kachaje/goydb/pkg/public"
+	"github.com/kachaje/utils"
 )
 
 func main() {

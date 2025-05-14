@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

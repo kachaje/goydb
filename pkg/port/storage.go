@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/model"
 )
 
 type AllDocsQuery struct {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/model"
 )
 
 type UniqueIndexUint64KeyFunc func(doc *model.Document) uint64

@@ -3,7 +3,7 @@ package goydb
 import (
 	"net/http"
 
-	"github.com/goydb/goydb/internal/adapter/storage"
+	"github.com/kachaje/goydb/internal/adapter/storage"
 )
 
 type Goydb struct {

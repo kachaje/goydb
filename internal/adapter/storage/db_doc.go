@@ -3,8 +3,8 @@ package storage
 import (
 	"context"
 
-	"github.com/goydb/goydb/pkg/model"
-	"github.com/goydb/goydb/pkg/port"
+	"github.com/kachaje/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/port"
 )
 
 func (d *Database) Transaction(ctx context.Context, fn func(tx *Transaction) error) error {

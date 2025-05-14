@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/model"
 )
 
 type SessionPost struct {

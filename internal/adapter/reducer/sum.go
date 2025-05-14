@@ -1,7 +1,7 @@
 package reducer
 
 import (
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/model"
 )
 
 type Sum struct {

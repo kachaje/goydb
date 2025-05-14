@@ -1,7 +1,7 @@
 package index
 
 import (
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/model"
 )
 
 const DeletedIndexName = "_deleted"

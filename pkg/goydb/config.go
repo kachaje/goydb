@@ -11,13 +11,13 @@ import (
 	"github.com/caarlos0/env/v6"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
-	"github.com/goydb/goydb/internal/adapter/storage"
-	"github.com/goydb/goydb/internal/adapter/view/gojaview"
-	"github.com/goydb/goydb/internal/adapter/view/tengoview"
-	"github.com/goydb/goydb/internal/controller"
-	"github.com/goydb/goydb/internal/handler"
-	"github.com/goydb/goydb/pkg/model"
-	"github.com/goydb/goydb/pkg/public"
+	"github.com/kachaje/goydb/internal/adapter/storage"
+	"github.com/kachaje/goydb/internal/adapter/view/gojaview"
+	"github.com/kachaje/goydb/internal/adapter/view/tengoview"
+	"github.com/kachaje/goydb/internal/controller"
+	"github.com/kachaje/goydb/internal/handler"
+	"github.com/kachaje/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/public"
 )
 
 type Config struct {

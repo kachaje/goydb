@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/goydb/goydb/pkg/model"
-	"github.com/goydb/goydb/pkg/port"
+	"github.com/kachaje/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/port"
 )
 
 type DBDocsAll struct {

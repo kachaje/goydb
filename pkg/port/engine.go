@@ -3,7 +3,7 @@ package port
 import (
 	"errors"
 
-	"github.com/goydb/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/model"
 )
 
 var ErrNotFound = errors.New("resource not found")

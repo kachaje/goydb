@@ -1,8 +1,8 @@
 package reducer
 
 import (
-	"github.com/goydb/goydb/internal/adapter/view/gojaview"
-	"github.com/goydb/goydb/pkg/port"
+	"github.com/kachaje/goydb/internal/adapter/view/gojaview"
+	"github.com/kachaje/goydb/pkg/port"
 )
 
 // source: https://docs.couchdb.org/en/stable/ddocs/ddocs.html?highlight=_stats#built-in-reduce-functions

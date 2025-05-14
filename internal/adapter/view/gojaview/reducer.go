@@ -6,8 +6,8 @@ import (
 	"reflect"
 
 	"github.com/dop251/goja"
-	"github.com/goydb/goydb/pkg/model"
-	"github.com/goydb/goydb/pkg/port"
+	"github.com/kachaje/goydb/pkg/model"
+	"github.com/kachaje/goydb/pkg/port"
 )
 
 const reduceOver = 1000
