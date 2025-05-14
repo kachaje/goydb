@@ -18,12 +18,12 @@ func (s Session) IsServerAdmin() bool {
 	return false
 }
 
-func (s Session) Store(values map[interface{}]interface{}) {
+func (s Session) Store(values map[any]any) {
 	values["name"] = s.Name
 	values["roles"] = s.Roles
 }
 
-func (s *Session) Restore(values map[interface{}]interface{}) {
+func (s *Session) Restore(values map[any]any) {
 	s.Name = values["name"].(string)
 	s.Roles = values["roles"].([]string)
 }

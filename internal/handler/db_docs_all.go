@@ -57,7 +57,7 @@ func (s *DBDocsAll) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		response.Rows[i].Value = Value{Rev: doc.Rev}
 		response.Rows[i].Doc = doc.Data
 		if response.Rows[i].Doc == nil {
-			response.Rows[i].Doc = make(map[string]interface{})
+			response.Rows[i].Doc = make(map[string]any)
 		}
 		response.Rows[i].Doc["_id"] = doc.ID
 		response.Rows[i].Doc["_rev"] = doc.Rev
@@ -76,8 +76,8 @@ type Value struct {
 	Rev string `json:"rev"`
 }
 type Rows struct {
-	ID    string                 `json:"id,omitempty"`
-	Key   interface{}            `json:"key,omitempty"`
-	Value interface{}            `json:"value,omitempty"`
-	Doc   map[string]interface{} `json:"doc,omitempty"`
+	ID    string         `json:"id,omitempty"`
+	Key   any            `json:"key,omitempty"`
+	Value any            `json:"value,omitempty"`
+	Doc   map[string]any `json:"doc,omitempty"`
 }

@@ -23,7 +23,7 @@ func TestViewServer_ExecuteView(t *testing.T) {
 			name:   "empty emit",
 			script: `function(doc) {}`,
 			docs: []*model.Document{
-				{ID: "1", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "1", Rev: "0-REV", Data: map[string]any{
 					"test": 1,
 				}},
 			},
@@ -37,7 +37,7 @@ func TestViewServer_ExecuteView(t *testing.T) {
 			}`,
 			options: url.Values{},
 			docs: []*model.Document{
-				{ID: "1", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "1", Rev: "0-REV", Data: map[string]any{
 					"test": 1,
 				}},
 			},
@@ -57,10 +57,10 @@ func TestViewServer_ExecuteView(t *testing.T) {
 			}`,
 			options: url.Values{},
 			docs: []*model.Document{
-				{ID: "1", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "1", Rev: "0-REV", Data: map[string]any{
 					"test": 1,
 				}},
-				{ID: "2", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "2", Rev: "0-REV", Data: map[string]any{
 					"test": 123,
 				}},
 			},

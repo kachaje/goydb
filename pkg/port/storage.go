@@ -39,7 +39,7 @@ type SearchResult struct {
 type SearchRecord struct {
 	ID     string
 	Order  []float64
-	Fields map[string]interface{}
+	Fields map[string]any
 }
 
 type ChangeListener interface {

@@ -15,8 +15,8 @@ const reduceOver = 1000
 type Reducer struct {
 	vm          *goja.Runtime
 	reducedDocs []*model.Document
-	keys        []interface{}
-	values      []interface{}
+	keys        []any
+	values      []any
 	reduceOver  int
 }
 
@@ -87,7 +87,7 @@ func (r *Reducer) reduce(rereduce bool) {
 	})
 }
 
-func (r *Reducer) Result() map[interface{}]interface{} {
+func (r *Reducer) Result() map[any]any {
 	// check if a reduce need to happen because there
 	// are still keys and values not reduced
 	if len(r.keys) != 0 {
@@ -104,7 +104,7 @@ func (r *Reducer) Result() map[interface{}]interface{} {
 	r.reduce(true)
 
 	// reformat the output
-	result := make(map[interface{}]interface{})
+	result := make(map[any]any)
 	for _, doc := range r.reducedDocs {
 		result[doc.Key] = doc.Value
 	}

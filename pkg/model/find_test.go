@@ -214,38 +214,38 @@ func TestFieldSelector_Match(t *testing.T) {
 		NewTestCase("type nil true", SelectorOpType, nil, "null", true),
 
 		// $in
-		NewTestCase("In 1/0 false", SelectorOpIn, 1, []interface{}{}, false),
-		NewTestCase("In 1/1 true", SelectorOpIn, 1, []interface{}{1}, true),
-		NewTestCase("In 1/2 true", SelectorOpIn, 1, []interface{}{2, 1}, true),
-		NewTestCase("In -/- false", SelectorOpIn, nil, []interface{}{}, false),
-		NewTestCase("In s/is true", SelectorOpIn, "Test", []interface{}{2, "Test"}, true),
+		NewTestCase("In 1/0 false", SelectorOpIn, 1, []any{}, false),
+		NewTestCase("In 1/1 true", SelectorOpIn, 1, []any{1}, true),
+		NewTestCase("In 1/2 true", SelectorOpIn, 1, []any{2, 1}, true),
+		NewTestCase("In -/- false", SelectorOpIn, nil, []any{}, false),
+		NewTestCase("In s/is true", SelectorOpIn, "Test", []any{2, "Test"}, true),
 
 		// $nin
-		NewTestCase("Nin 1/0 true", SelectorOpNin, 1, []interface{}{}, true),
-		NewTestCase("Nin 1/1 false", SelectorOpNin, 1, []interface{}{1}, false),
-		NewTestCase("Nin 1/2 false", SelectorOpNin, 1, []interface{}{2, 1}, false),
-		NewTestCase("Nin -/- true", SelectorOpNin, nil, []interface{}{}, true),
-		NewTestCase("Nin s/is false", SelectorOpNin, "Test", []interface{}{2, "Test"}, false),
+		NewTestCase("Nin 1/0 true", SelectorOpNin, 1, []any{}, true),
+		NewTestCase("Nin 1/1 false", SelectorOpNin, 1, []any{1}, false),
+		NewTestCase("Nin 1/2 false", SelectorOpNin, 1, []any{2, 1}, false),
+		NewTestCase("Nin -/- true", SelectorOpNin, nil, []any{}, true),
+		NewTestCase("Nin s/is false", SelectorOpNin, "Test", []any{2, "Test"}, false),
 
 		// $size
 		NewTestCase("Size 0 true", SelectorOpSize, 0, nil, false),
-		NewTestCase("Size 0 true", SelectorOpSize, []interface{}{}, 0, true),
-		NewTestCase("Size 1 false", SelectorOpSize, []interface{}{1}, 0, false),
-		NewTestCase("Size 1 true", SelectorOpSize, []interface{}{1}, 1, true),
-		NewTestCase("Size 2 true", SelectorOpSize, []interface{}{1, 2}, 2, true),
-		NewTestCase("Size 2 true", SelectorOpSize, []interface{}{1, 2, 3}, 2, false),
+		NewTestCase("Size 0 true", SelectorOpSize, []any{}, 0, true),
+		NewTestCase("Size 1 false", SelectorOpSize, []any{1}, 0, false),
+		NewTestCase("Size 1 true", SelectorOpSize, []any{1}, 1, true),
+		NewTestCase("Size 2 true", SelectorOpSize, []any{1, 2}, 2, true),
+		NewTestCase("Size 2 true", SelectorOpSize, []any{1, 2, 3}, 2, false),
 
 		// $mod
-		NewTestCase("Mod 1/-/- false", SelectorOpMod, 1, []interface{}{}, false),
-		NewTestCase("Mod 1/1/- false", SelectorOpMod, 1, []interface{}{1}, false),
+		NewTestCase("Mod 1/-/- false", SelectorOpMod, 1, []any{}, false),
+		NewTestCase("Mod 1/1/- false", SelectorOpMod, 1, []any{1}, false),
 		NewTestCase("Mod 1/s false", SelectorOpMod, 1, "asd", false),
 		NewTestCase("Mod 1/i false", SelectorOpMod, 1, 1, false),
-		NewTestCase("Mod 0/1/1 false", SelectorOpMod, 0, []interface{}{1, 1}, false),
-		NewTestCase("Mod nil/1/1 false", SelectorOpMod, nil, []interface{}{1, 1}, false),
-		NewTestCase("Mod 1/1/0 false", SelectorOpMod, 1, []interface{}{1, 0}, true),
-		NewTestCase("Mod 1.0/1/0 false", SelectorOpMod, 1.0, []interface{}{1, 0}, false),
-		NewTestCase("Mod 1/1.0/0 false", SelectorOpMod, 1, []interface{}{1.0, 0}, false),
-		NewTestCase("Mod 235/7/4 false", SelectorOpMod, 235, []interface{}{7, 4}, true),
+		NewTestCase("Mod 0/1/1 false", SelectorOpMod, 0, []any{1, 1}, false),
+		NewTestCase("Mod nil/1/1 false", SelectorOpMod, nil, []any{1, 1}, false),
+		NewTestCase("Mod 1/1/0 false", SelectorOpMod, 1, []any{1, 0}, true),
+		NewTestCase("Mod 1.0/1/0 false", SelectorOpMod, 1.0, []any{1, 0}, false),
+		NewTestCase("Mod 1/1.0/0 false", SelectorOpMod, 1, []any{1.0, 0}, false),
+		NewTestCase("Mod 235/7/4 false", SelectorOpMod, 235, []any{7, 4}, true),
 
 		// $regex
 		NewTestCase("Regex i/s false", SelectorOpRegex, 0, "0", false),
@@ -284,10 +284,10 @@ func QueryTest(t *testing.T, query string, testCases map[string]bool) {
 }
 
 type NoDocumentField struct {
-	Value interface{}
+	Value any
 }
 
-func (f NoDocumentField) Field(path string) interface{} {
+func (f NoDocumentField) Field(path string) any {
 	return f.Value
 }
 
@@ -298,7 +298,7 @@ func (f NoDocumentField) Exists(path string) bool {
 type TestCase struct {
 	name      string
 	field     string
-	value     interface{}
+	value     any
 	operation SelectorOp
 	df        DocumentField
 	want      bool
@@ -307,7 +307,7 @@ type TestCase struct {
 func NewTestCase(
 	name string,
 	operation SelectorOp,
-	fieldValue, value interface{},
+	fieldValue, value any,
 	want bool) *TestCase {
 	return &TestCase{
 		name:      name,

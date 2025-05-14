@@ -63,7 +63,7 @@ func TestRegularIndex(t *testing.T) {
 			t.Run("with documents", func(t *testing.T) {
 				err := ri.DocumentStored(ctx, tx, &model.Document{
 					ID: "test",
-					Data: map[string]interface{}{
+					Data: map[string]any{
 						"name": "Foo",
 						"test": 123,
 					},
@@ -72,7 +72,7 @@ func TestRegularIndex(t *testing.T) {
 				// same record twice
 				err = ri.DocumentStored(ctx, tx, &model.Document{
 					ID: "test",
-					Data: map[string]interface{}{
+					Data: map[string]any{
 						"name": "Foo",
 						"test": 123,
 					},
@@ -80,7 +80,7 @@ func TestRegularIndex(t *testing.T) {
 				assert.NoError(t, err)
 				err = ri.DocumentStored(ctx, tx, &model.Document{
 					ID: "test1",
-					Data: map[string]interface{}{
+					Data: map[string]any{
 						"name": "Foo",
 						"test": 234,
 					},
@@ -107,28 +107,28 @@ func TestRegularIndex(t *testing.T) {
 						ID:          "test",
 						Key:         "name",
 						Value:       "Foo",
-						Data:        map[string]interface{}{},
+						Data:        map[string]any{},
 						Attachments: map[string]*model.Attachment{},
 					},
 					&model.Document{
 						ID:          "test1",
 						Key:         "name",
 						Value:       "Foo",
-						Data:        map[string]interface{}{},
+						Data:        map[string]any{},
 						Attachments: map[string]*model.Attachment{},
 					},
 					&model.Document{
 						ID:          "test",
 						Key:         "test",
 						Value:       int(123),
-						Data:        map[string]interface{}{},
+						Data:        map[string]any{},
 						Attachments: map[string]*model.Attachment{},
 					},
 					&model.Document{
 						ID:          "test1",
 						Key:         "test",
 						Value:       int(234),
-						Data:        map[string]interface{}{},
+						Data:        map[string]any{},
 						Attachments: map[string]*model.Attachment{},
 					},
 				}, docs)
@@ -161,14 +161,14 @@ func TestRegularIndex(t *testing.T) {
 							ID:          "test1",
 							Key:         "name",
 							Value:       "Foo",
-							Data:        map[string]interface{}{},
+							Data:        map[string]any{},
 							Attachments: map[string]*model.Attachment{},
 						},
 						&model.Document{
 							ID:          "test1",
 							Key:         "test",
 							Value:       int(234),
-							Data:        map[string]interface{}{},
+							Data:        map[string]any{},
 							Attachments: map[string]*model.Attachment{},
 						},
 					}, docs)

@@ -36,8 +36,8 @@ func (d *Database) AddListener(ctx context.Context, cl port.ChangeListener) erro
 // using a separate goroutine
 func (d *Database) NotifyDocumentUpdate(doc *model.Document) {
 	go func() {
-		var deletionKeys []interface{}
-		d.listener.Range(func(k, value interface{}) bool {
+		var deletionKeys []any
+		d.listener.Range(func(k, value any) bool {
 			cl := value.(*changeListerner)
 			err := cl.cl.DocumentChanged(cl.ctx, doc)
 			if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {

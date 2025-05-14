@@ -14,7 +14,7 @@ import (
 // handles nested document traversal
 type DocumentField interface {
 	// Field get a field value (nesting supported with . operator)
-	Field(path string) interface{}
+	Field(path string) any
 	Exists(path string) bool
 }
 
@@ -366,7 +366,7 @@ const (
 
 type FieldSelector struct {
 	Field     string
-	Value     interface{}
+	Value     any
 	Operation SelectorOp
 }
 
@@ -379,7 +379,7 @@ func (fs *FieldSelector) UnmarshalJSON(blob []byte) error {
 	}
 
 	// selector definition
-	var def map[string]interface{}
+	var def map[string]any
 	err := json.Unmarshal(blob, &def)
 	if err != nil {
 		return err
@@ -555,7 +555,7 @@ type SelectorValue struct {
 	i int64
 	f float64
 	s string
-	o interface{}
+	o any
 }
 
 func (sv SelectorValue) Values() []SelectorValue {
@@ -579,7 +579,7 @@ func (sv SelectorValue) ArrayLen() int {
 	return v.Len()
 }
 
-func (sv *SelectorValue) Set(v interface{}) {
+func (sv *SelectorValue) Set(v any) {
 	switch ft := v.(type) {
 	case nil:
 		sv.t = SelectorValueTypeNil

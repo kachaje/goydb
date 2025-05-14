@@ -36,7 +36,7 @@ func NewViewServer(fn string) (port.ViewServer, error) {
 }
 
 func (s *ViewServer) ExecuteView(ctx context.Context, docs []*model.Document) ([]*model.Document, error) {
-	simpleDocs := make([]interface{}, len(docs))
+	simpleDocs := make([]any, len(docs))
 	for i, doc := range docs {
 		doc.Data["_id"] = doc.ID
 		doc.Data["_rev"] = doc.Rev
@@ -54,14 +54,14 @@ func (s *ViewServer) ExecuteView(ctx context.Context, docs []*model.Document) ([
 		return nil, err
 	}
 
-	resultData, ok := s.vm.Get("_result").Export().([]interface{})
+	resultData, ok := s.vm.Get("_result").Export().([]any)
 	if !ok {
 		return nil, fmt.Errorf("unable to export")
 	}
 	result := make([]*model.Document, len(resultData))
 
 	for i, rd := range resultData {
-		row := rd.([]interface{})
+		row := rd.([]any)
 		// fmt.Println(i, row)
 		result[i] = &model.Document{
 			Key:   row[0],

@@ -109,11 +109,11 @@ func (s *DBChanges) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 type ChangeDoc struct {
-	Seq     string                 `json:"seq"`
-	ID      string                 `json:"id"`
-	Changes []Revisions            `json:"changes"`
-	Deleted bool                   `json:"deleted,omitempty"`
-	Doc     map[string]interface{} `json:"doc,omitempty"`
+	Seq     string         `json:"seq"`
+	ID      string         `json:"id"`
+	Changes []Revisions    `json:"changes"`
+	Deleted bool           `json:"deleted,omitempty"`
+	Doc     map[string]any `json:"doc,omitempty"`
 }
 
 type Revisions struct {

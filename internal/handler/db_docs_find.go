@@ -51,7 +51,7 @@ func (s *DBDocsFind) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	response := FindResponse{
 		ExecutionStats: stats,
-		Docs:           make([]map[string]interface{}, len(docs)),
+		Docs:           make([]map[string]any, len(docs)),
 		Bookmark:       bookmark,
 	}
 	if !find.ExecutionStats {
@@ -61,7 +61,7 @@ func (s *DBDocsFind) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	for i, doc := range docs {
 		response.Docs[i] = doc.Data
 		if response.Docs[i] == nil {
-			response.Docs[i] = make(map[string]interface{})
+			response.Docs[i] = make(map[string]any)
 		}
 		response.Docs[i]["_id"] = doc.ID
 		response.Docs[i]["_rev"] = doc.Rev
@@ -72,8 +72,8 @@ func (s *DBDocsFind) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 type FindResponse struct {
-	Docs           []map[string]interface{} `json:"docs"`
-	Bookmark       string                   `json:"bookmark,omitempty"`
-	ExecutionStats *model.ExecutionStats    `json:"execution_stats"`
-	Warning        string                   `json:"warning,omitempty"`
+	Docs           []map[string]any      `json:"docs"`
+	Bookmark       string                `json:"bookmark,omitempty"`
+	ExecutionStats *model.ExecutionStats `json:"execution_stats"`
+	Warning        string                `json:"warning,omitempty"`
 }

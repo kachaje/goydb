@@ -5,12 +5,12 @@ import (
 )
 
 type Count struct {
-	result map[interface{}]interface{}
+	result map[any]any
 }
 
 func NewCount() *Count {
 	return &Count{
-		result: make(map[interface{}]interface{}),
+		result: make(map[any]any),
 	}
 }
 
@@ -24,6 +24,6 @@ func (r *Count) Reduce(doc *model.Document) {
 	}
 }
 
-func (r *Count) Result() map[interface{}]interface{} {
+func (r *Count) Result() map[any]any {
 	return r.result
 }

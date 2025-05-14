@@ -59,7 +59,7 @@ func NewViewServer(fn string) (port.ViewServer, error) {
 		"base64", // base64 encoding and decoding functions
 	))
 
-	err := script.Add("docs", []interface{}{})
+	err := script.Add("docs", []any{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to add docs: %w", err)
 	}
@@ -90,7 +90,7 @@ func (s *ViewServer) ExecuteView(ctx context.Context, docs []*model.Document) ([
 	result := make([]*model.Document, len(resultData))
 
 	for i, rd := range resultData {
-		row := rd.([]interface{})
+		row := rd.([]any)
 		// fmt.Println(i, row)
 		result[i] = &model.Document{
 			Key:   row[0],
@@ -117,20 +117,20 @@ func (s *ViewServer) ExecuteSearch(ctx context.Context, docs []*model.Document) 
 	result := make([]*model.Document, len(resultData))
 
 	for i, rd := range resultData {
-		row := rd.([]interface{})
+		row := rd.([]any)
 		// fmt.Println(row)
 		sid := &model.Document{
 			ID:      row[0].(string),
-			Fields:  make(map[string]interface{}),
+			Fields:  make(map[string]any),
 			Options: make(map[string]model.SearchIndexOption),
 		}
 
-		indexRecords := row[1].([]interface{})
+		indexRecords := row[1].([]any)
 		for _, ir := range indexRecords {
-			v := ir.([]interface{})
+			v := ir.([]any)
 			field := v[0].(string)
 			value := v[1]
-			options := v[2].(map[string]interface{})
+			options := v[2].(map[string]any)
 
 			sid.Fields[field] = value
 			sio := model.SearchIndexOption{
@@ -152,7 +152,7 @@ func (s *ViewServer) ExecuteSearch(ctx context.Context, docs []*model.Document) 
 }
 
 func (s *ViewServer) setDocs(docs []*model.Document) error {
-	simpleDocs := make([]interface{}, len(docs))
+	simpleDocs := make([]any, len(docs))
 	for i, doc := range docs {
 		doc.Data["_id"] = doc.ID
 		doc.Data["_rev"] = doc.Rev

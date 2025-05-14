@@ -31,7 +31,7 @@ func NewViewIndex(ddfn *model.DesignDocFn, engines port.ViewEngines) *ViewIndex 
 
 	vi.RegularIndex = NewRegularIndex(ddfn, vi.indexSingleDocument)
 	vi.RegularIndex.cleanKey = func(b []byte) string {
-		var i interface{}
+		var i any
 		err := cbor.Unmarshal(b, &i)
 		if err != nil {
 			return err.Error()

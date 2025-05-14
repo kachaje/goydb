@@ -22,14 +22,14 @@ type Document struct {
 
 	// Data
 	Attachments map[string]*Attachment `json:"_attachments,omitempty"`
-	Data        map[string]interface{} `json:"data,omitempty"`
+	Data        map[string]any         `json:"data,omitempty"`
 
 	// View
-	Key   interface{} `json:"key,omitempty"`
-	Value interface{} `json:"value,omitempty"`
+	Key   any `json:"key,omitempty"`
+	Value any `json:"value,omitempty"`
 
 	// Search
-	Fields  map[string]interface{}       `json:"fields,omitempty"`
+	Fields  map[string]any               `json:"fields,omitempty"`
 	Options map[string]SearchIndexOption `json:"options,omitempty"`
 }
 
@@ -131,10 +131,10 @@ func (doc *Document) Functions() []*Function {
 	var functions []*Function
 
 	// regular view functions
-	views, ok := doc.Data["views"].(map[string]interface{})
+	views, ok := doc.Data["views"].(map[string]any)
 	if ok {
 		for name, viewInterface := range views {
-			view, ok := viewInterface.(map[string]interface{})
+			view, ok := viewInterface.(map[string]any)
 			if !ok {
 				continue
 			}
@@ -153,10 +153,10 @@ func (doc *Document) Functions() []*Function {
 	}
 
 	// search functions
-	indexes, ok := doc.Data["indexes"].(map[string]interface{})
+	indexes, ok := doc.Data["indexes"].(map[string]any)
 	if ok {
 		for name, searchInterface := range indexes {
-			search, ok := searchInterface.(map[string]interface{})
+			search, ok := searchInterface.(map[string]any)
 			if !ok {
 				continue
 			}
@@ -178,7 +178,7 @@ func (doc *Document) Functions() []*Function {
 }
 
 func (doc *Document) View(name string) (view *View, ok bool) {
-	views, ok := doc.Data["views"].(map[string]interface{})
+	views, ok := doc.Data["views"].(map[string]any)
 	if !ok {
 		return nil, false
 	}
@@ -188,7 +188,7 @@ func (doc *Document) View(name string) (view *View, ok bool) {
 		return nil, false
 	}
 
-	viewData, ok := viewInterface.(map[string]interface{})
+	viewData, ok := viewInterface.(map[string]any)
 	if !ok {
 		return nil, false
 	}
@@ -203,7 +203,7 @@ func (doc *Document) View(name string) (view *View, ok bool) {
 	}, true
 }
 
-func (doc *Document) Field(path string) interface{} {
+func (doc *Document) Field(path string) any {
 	parts := strings.Split(path, ".")
 	v := reflect.ValueOf(doc.Data)
 	if v.IsZero() {

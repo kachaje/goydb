@@ -5,12 +5,12 @@ import (
 )
 
 type None struct {
-	result map[interface{}]interface{}
+	result map[any]any
 }
 
 func NewNone() *Count {
 	return &Count{
-		result: make(map[interface{}]interface{}),
+		result: make(map[any]any),
 	}
 }
 
@@ -18,6 +18,6 @@ func (r *None) Reduce(doc *model.Document) {
 	r.result[doc.ID] = doc
 }
 
-func (r *None) Result() map[interface{}]interface{} {
+func (r *None) Result() map[any]any {
 	return r.result
 }

@@ -88,7 +88,7 @@ func (s *DBView) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	q.ViewGroup = stringOption("group", "", options)
 
 	var total int
-	var docs map[interface{}]interface{}
+	var docs map[any]any
 	var err error
 	if boolOption("reduce", true, options) {
 		err = db.Transaction(r.Context(), func(tx *storage.Transaction) error {
@@ -109,7 +109,7 @@ func (s *DBView) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return err
 		})
 	} else {
-		docs = make(map[interface{}]interface{})
+		docs = make(map[any]any)
 		err = db.Transaction(r.Context(), func(tx *storage.Transaction) error {
 			iter, err := db.IndexIterator(r.Context(), tx, idx)
 			if err != nil {

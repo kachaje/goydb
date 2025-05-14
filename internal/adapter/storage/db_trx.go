@@ -36,7 +36,7 @@ func (tx *Transaction) bucket() []byte {
 	}
 }
 
-func (tx *Transaction) GetRaw(ctx context.Context, key []byte, value interface{}) error {
+func (tx *Transaction) GetRaw(ctx context.Context, key []byte, value any) error {
 	data, err := tx.Get(tx.bucket(), key)
 	if err != nil {
 		return err
@@ -50,7 +50,7 @@ func (tx *Transaction) GetRaw(ctx context.Context, key []byte, value interface{}
 	return nil
 }
 
-func (tx *Transaction) PutRaw(ctx context.Context, key []byte, raw interface{}) error {
+func (tx *Transaction) PutRaw(ctx context.Context, key []byte, raw any) error {
 	data, err := bson.Marshal(raw)
 	if err != nil {
 		return err
@@ -125,7 +125,7 @@ func (tx *Transaction) GetDocument(ctx context.Context, docID string) (*model.Do
 		return nil, err
 	}
 	if doc.Data == nil {
-		doc.Data = make(map[string]interface{})
+		doc.Data = make(map[string]any)
 	}
 	doc.Data["_id"] = doc.ID
 	doc.Data["_rev"] = doc.Rev

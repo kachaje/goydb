@@ -5,12 +5,12 @@ import (
 )
 
 type Sum struct {
-	result map[interface{}]interface{}
+	result map[any]any
 }
 
 func NewSum() *Sum {
 	return &Sum{
-		result: make(map[interface{}]interface{}),
+		result: make(map[any]any),
 	}
 }
 
@@ -42,6 +42,6 @@ func (r *Sum) Reduce(doc *model.Document) {
 	}
 }
 
-func (r *Sum) Result() map[interface{}]interface{} {
+func (r *Sum) Result() map[any]any {
 	return r.result
 }

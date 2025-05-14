@@ -8,5 +8,5 @@ type ReducerServerBuilder func(fn string) (Reducer, error)
 
 type Reducer interface {
 	Reduce(doc *model.Document)
-	Result() map[interface{}]interface{}
+	Result() map[any]any
 }

@@ -23,7 +23,7 @@ func TestViewServer_ExecuteView(t *testing.T) {
 			name:   "empty emit",
 			script: `func(doc) {}`,
 			docs: []*model.Document{
-				{ID: "1", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "1", Rev: "0-REV", Data: map[string]any{
 					"test": 1,
 				}},
 			},
@@ -37,7 +37,7 @@ func TestViewServer_ExecuteView(t *testing.T) {
 			}`,
 			options: url.Values{},
 			docs: []*model.Document{
-				{ID: "1", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "1", Rev: "0-REV", Data: map[string]any{
 					"test": 1,
 				}},
 			},
@@ -57,10 +57,10 @@ func TestViewServer_ExecuteView(t *testing.T) {
 			}`,
 			options: url.Values{},
 			docs: []*model.Document{
-				{ID: "1", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "1", Rev: "0-REV", Data: map[string]any{
 					"test": 1,
 				}},
-				{ID: "2", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "2", Rev: "0-REV", Data: map[string]any{
 					"test": 123,
 				}},
 			},
@@ -105,7 +105,7 @@ func TestViewServer_ExecuteSearch(t *testing.T) {
 			name:   "empty emit",
 			script: `func(doc) {}`,
 			docs: []*model.Document{
-				{ID: "1", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "1", Rev: "0-REV", Data: map[string]any{
 					"test": 1,
 				}},
 			},
@@ -120,13 +120,13 @@ func TestViewServer_ExecuteSearch(t *testing.T) {
 			}`,
 			options: url.Values{},
 			docs: []*model.Document{
-				{ID: "1", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "1", Rev: "0-REV", Data: map[string]any{
 					"name": "test",
 				}},
 			},
 			want: []*model.Document{{
 				ID: "1",
-				Fields: map[string]interface{}{
+				Fields: map[string]any{
 					"name":   "test",
 					"upcase": "TEST",
 				},
@@ -144,17 +144,17 @@ func TestViewServer_ExecuteSearch(t *testing.T) {
 			}`,
 			options: url.Values{},
 			docs: []*model.Document{
-				{ID: "1", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "1", Rev: "0-REV", Data: map[string]any{
 					"name": "test",
 				}},
-				{ID: "2", Rev: "0-REV", Data: map[string]interface{}{
+				{ID: "2", Rev: "0-REV", Data: map[string]any{
 					"name": "test",
 				}},
 			},
 			want: []*model.Document{
 				{
 					ID: "1",
-					Fields: map[string]interface{}{
+					Fields: map[string]any{
 						"name": "test",
 					},
 					Options: map[string]model.SearchIndexOption{
@@ -163,7 +163,7 @@ func TestViewServer_ExecuteSearch(t *testing.T) {
 				},
 				{
 					ID: "2",
-					Fields: map[string]interface{}{
+					Fields: map[string]any{
 						"name": "test",
 					},
 					Options: map[string]model.SearchIndexOption{

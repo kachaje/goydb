@@ -73,7 +73,7 @@ type SearchResult struct {
 }
 
 type SearchRow struct {
-	ID     string                 `json:"id"`
-	Order  []float64              `json:"order"`
-	Fields map[string]interface{} `json:"fields"`
+	ID     string         `json:"id"`
+	Order  []float64      `json:"order"`
+	Fields map[string]any `json:"fields"`
 }

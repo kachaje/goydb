@@ -26,7 +26,7 @@ func (s *DBDocPut) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var doc map[string]interface{}
+	var doc map[string]any
 	err := json.NewDecoder(r.Body).Decode(&doc)
 	docID, docIDok := doc["_id"].(string)
 	if err != nil || !docIDok {
