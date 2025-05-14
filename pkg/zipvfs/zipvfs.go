@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"context"
 	"io"
-	"io/ioutil"
 	"net/http"
 
 	"golang.org/x/tools/godoc/vfs/httpfs"
@@ -36,7 +35,7 @@ func BuildFileSystem(ctx context.Context, zipFile io.Reader) (http.FileSystem, e
 			continue
 		}
 
-		data, err := ioutil.ReadAll(r)
+		data, err := io.ReadAll(r)
 		if err != nil {
 			return nil, err
 		}
