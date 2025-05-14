@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/caarlos0/env/v6"
 	"github.com/gorilla/mux"
@@ -68,6 +69,14 @@ func (c *Config) ParseFlags() {
 // on the given configuration.
 func (c *Config) BuildDatabase() (*Goydb, error) {
 	var gdb Goydb
+
+	// Create required folders if they don't exist
+	for _, folder := range []string{c.DatabaseDir, c.PublicDir} {
+		_, err := os.Stat(folder)
+		if os.IsNotExist(err) {
+			os.MkdirAll(folder, 0755)
+		}
+	}
 
 	secret, err := hex.DecodeString(c.CookieSecret)
 	if err != nil {
