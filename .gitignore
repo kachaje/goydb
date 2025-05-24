@@ -7,3 +7,5 @@ client/data.dump
 testdbs
 
 .vscode/*
+
+.DS_Store
