@@ -35,9 +35,9 @@ type Config struct {
 	// CookieSecret a secret that is used to verify the
 	// integrity, usually generated using openssl rand -hex 32
 	CookieSecret string `env:"GOYDB_SECRET" envDefault:"21ccf11d067cec8eebd663af3dc8785521d1cc366f0d533e6740c1cb6840dceb"`
-	// Aministrators list of username:password sperated by ","
+	// Administrators list of username:password sperated by ","
 	// for multiple users
-	Aministrators string `env:"GOYDB_ADMINS" envDefault:"admin:secret"`
+	Administrators string `env:"GOYDB_ADMINS" envDefault:"admin:secret"`
 	// Containers are zip file based containers that should be mounted before the
 	// database application
 	Containers []public.Container
@@ -60,7 +60,7 @@ func (c *Config) ParseFlags() {
 	flag.StringVar(&c.PublicDir, "public", c.PublicDir, "directory public data")
 	flag.StringVar(&c.ListenAddress, "addr", c.ListenAddress, "listening address")
 	flag.StringVar(&c.CookieSecret, "cookie-secret", c.CookieSecret, "secret for the cookies")
-	flag.StringVar(&c.Aministrators, "admins", c.Aministrators, "admins for the databases")
+	flag.StringVar(&c.Administrators, "admins", c.Administrators, "admins for the databases")
 
 	flag.Parse()
 }
@@ -84,7 +84,7 @@ func (c *Config) BuildDatabase() (*Goydb, error) {
 	}
 	store := sessions.NewCookieStore(secret)
 
-	admins, err := model.ParseAdmins(c.Aministrators)
+	admins, err := model.ParseAdmins(c.Administrators)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse admins: %w", err)
 	}
