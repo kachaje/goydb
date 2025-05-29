@@ -17,6 +17,7 @@ type Router struct {
 func (router Router) Build(r *mux.Router) error {
 	b := Base(router)
 
+	r.Methods("POST").Path("/").Handler(&DBPost{IBase: &b})
 	r.Methods("POST").Path("/_replicate").Handler(&Replicate{IBase: &b})
 
 	r.Methods("GET").Path("/_all_dbs").Handler(&DBAll{Base: b})
