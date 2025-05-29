@@ -32,3 +32,6 @@ jobs:
       - uses: rymndhng/release-on-push-action@master
         with:
           bump_version_scheme: patch
+      - uses: fjogeleit/http-request-action@v1
+        with:
+          url: "https://proxy.golang.org/github.com/kachaje/goydb/@v/v${{ github.ref_name }}.info"
