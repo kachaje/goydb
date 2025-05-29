@@ -1,19 +1,25 @@
 package handler
 
 import (
-	"fmt"
+	"encoding/json"
 	"net/http"
 )
 
 type Replicate struct {
-	Base
+	IBase
 }
 
 func (s *Replicate) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	r.Body.Close()
 
-	if _, ok := (Authenticator{Base: s.Base, RequiresAdmin: true}.Do(w, r)); !ok {
+	if _, ok := s.Authenticate(w, r); !ok {
 		return
 	}
-	fmt.Println("Past")
+
+	var doc map[string]any
+	err := json.NewDecoder(r.Body).Decode(&doc)
+	if err != nil {
+		WriteError(w, http.StatusBadRequest, err.Error())
+		return
+	}
 }
