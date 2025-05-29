@@ -2,10 +2,7 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
-
-	"github.com/google/uuid"
 )
 
 type DBPost struct {
@@ -20,18 +17,11 @@ func (s *DBPost) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var doc map[string]any
-	err := json.NewDecoder(r.Body).Decode(&doc)
+	doc, code, err := s.PutDoc(w, r)
 	if err != nil {
-		WriteError(w, http.StatusBadRequest, err.Error())
+		WriteError(w, code, err.Error())
 		return
 	}
-
-	if doc["_id"] == nil {
-		doc["_id"] = uuid.NewString()
-	}
-
-	fmt.Println(doc)
 
 	if doc["_id"] == nil {
 		WriteError(w, http.StatusInternalServerError, "no id attached")
