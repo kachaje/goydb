@@ -9,7 +9,7 @@ import (
 	"github.com/kachaje/goydb/internal/handler"
 )
 
-func TestReplicateStandard(t *testing.T) {
+func TestReplicateCode200(t *testing.T) {
 	req, err := http.NewRequest(http.MethodPost, "/_replicate", bytes.NewBuffer([]byte(`{}`)))
 	if err != nil {
 		t.Fatal(err)
@@ -31,7 +31,7 @@ func TestReplicateStandard(t *testing.T) {
 	}
 }
 
-func TestReplicateBadRequest(t *testing.T) {
+func TestReplicateCode400(t *testing.T) {
 	req, err := http.NewRequest(http.MethodPost, "/_replicate", bytes.NewBuffer([]byte("bad request")))
 	if err != nil {
 		t.Fatal(err)
@@ -53,7 +53,7 @@ func TestReplicateBadRequest(t *testing.T) {
 	}
 }
 
-func TestReplicateContinuous(t *testing.T) {
+func TestReplicateCode202(t *testing.T) {
 	req, err := http.NewRequest(http.MethodPost, "/_replicate", bytes.NewBuffer([]byte(`{"continuous":true}`)))
 	if err != nil {
 		t.Fatal(err)
@@ -71,6 +71,28 @@ func TestReplicateContinuous(t *testing.T) {
 	if status := rr.Code; status != http.StatusAccepted {
 		t.Errorf("handler returned wrong status code: got %v; want %v",
 			status, http.StatusAccepted,
+		)
+	}
+}
+
+func TestReplicateCode401(t *testing.T) {
+	req, err := http.NewRequest(http.MethodPost, "/_replicate", bytes.NewBuffer([]byte(`{"continuous":true}`)))
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.SetBasicAuth("admin", "secrets")
+
+	rr := httptest.NewRecorder()
+	p := handler.Replicate{IBase: &MockBase{}}
+
+	hnd := http.HandlerFunc(p.ServeHTTP)
+
+	hnd.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusUnauthorized {
+		t.Errorf("handler returned wrong status code: got %v; want %v",
+			status, http.StatusUnauthorized,
 		)
 	}
 }
