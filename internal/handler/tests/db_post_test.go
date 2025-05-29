@@ -10,7 +10,7 @@ import (
 )
 
 func TestDBPostWithId(t *testing.T) {
-	req, err := http.NewRequest(http.MethodPost, "/", bytes.NewBuffer([]byte(`{"_id":"test","name":"Test Name"}`)))
+	req, err := http.NewRequest(http.MethodPost, "/sample", bytes.NewBuffer([]byte(`{"_id":"test","name":"Test Name"}`)))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -32,7 +32,7 @@ func TestDBPostWithId(t *testing.T) {
 }
 
 func TestDBPostWithoutId(t *testing.T) {
-	req, err := http.NewRequest(http.MethodPost, "/", bytes.NewBuffer([]byte(`{"name":"Test Name"}`)))
+	req, err := http.NewRequest(http.MethodPost, "/sample", bytes.NewBuffer([]byte(`{"name":"Test Name"}`)))
 	if err != nil {
 		t.Fatal(err)
 	}

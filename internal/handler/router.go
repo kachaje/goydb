@@ -17,7 +17,6 @@ type Router struct {
 func (router Router) Build(r *mux.Router) error {
 	b := Base(router)
 
-	r.Methods("POST").Path("/").Handler(&DBPost{IBase: &b})
 	r.Methods("POST").Path("/_replicate").Handler(&Replicate{IBase: &b})
 
 	r.Methods("GET").Path("/_all_dbs").Handler(&DBAll{Base: b})
@@ -64,6 +63,8 @@ func (router Router) Build(r *mux.Router) error {
 	r.Methods("GET").Path("/{db}").Handler(&DBIndex{Base: b})
 	r.Methods("PUT").Path("/{db}").Handler(&DBCreate{Base: b})
 	r.Methods("DELETE").Path("/{db}").Handler(&DBDelete{Base: b})
+
+	r.Methods("POST").Path("/{db}").Handler(&DBPost{IBase: &b})
 
 	r.Methods("GET").Path("/").Handler(&Index{})
 
