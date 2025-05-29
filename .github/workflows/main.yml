@@ -28,7 +28,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      LATEST_TAG: ""
     steps:
       - uses: rymndhng/release-on-push-action@master
         with:
           bump_version_scheme: patch
+      - name: Fetch latest tag
+        run: echo "LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))"
+      - uses: fjogeleit/http-request-action@v1
+        with:
+          url: "https://proxy.golang.org/github.com/kachaje/goydb/@v/v${{ env.LATEST_TAG }}.info"
