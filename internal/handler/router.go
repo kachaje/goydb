@@ -31,6 +31,8 @@ func (router Router) Build(r *mux.Router) error {
 	r.Methods("GET").Path("/{db}/_changes").Handler(&DBChanges{Base: b})
 	r.Methods("POST").Path("/{db}/_find").Handler(&DBDocsFind{Base: b})
 
+	r.Methods("POST").Path("/{db}/_compact").Handler(&DBDocsCompact{Base: b})
+
 	r.Methods("GET").Path("/{db}/_security").Handler(&DBSecurityGet{Base: b})
 	r.Methods("PUT").Path("/{db}/_security").Handler(&DBSecurityPut{Base: b})
 
