@@ -24,11 +24,18 @@ jobs:
         run: go test -v ./...
 
   release-on-push:
-    needs: build
+    needs: [build]
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: rymndhng/release-on-push-action@master
+      - id: release
+        uses: rymndhng/release-on-push-action@master
         with:
           bump_version_scheme: patch
+          tag_prefix: v
+
+      - name: Refresh versions
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: "https://proxy.golang.org/github.com/kachaje/goydb/@v/${{ steps.release.outputs.tag_name }}.info"
